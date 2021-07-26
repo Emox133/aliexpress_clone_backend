@@ -6,18 +6,15 @@ dotenv.config({
     path: `${__dirname}/config.env`
 })
 
-const DB = process.env.DB.replace('<PASWORD>', process.env.DB_PASSWORD)
+const PORT = process.env.PORT || 5000
+const DB = process.env.DB.replace('<PASSWORD>', process.env.DB_PASSWORD)
 
 mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true
-}, () => {
-    console.log('DB connection successful...')
-})
-
-const PORT = process.env.PORT
+}).then(() => console.log('DB connection successful!'));
 
 const server = app.listen(PORT, () => {
     console.log(`App started on port ${PORT}`)
